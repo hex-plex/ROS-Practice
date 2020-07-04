@@ -186,3 +186,29 @@ void make6DofMarker(bool fixed, unsigned int interaction_mode, const tf::Vector3
         menu_handler.apply(*server,int_marker,name);
     }
 }
+
+void makeRandomDOFMarker(const tf::Vector3& position){
+    InteractiveMarker int_marker;
+    int_marker.header.frame_id = "base_link";
+    tf::pointTFToMsg(position, int_marker.pose.position);
+    int_marker.scale = 1;
+    int_marker.name = "6dof_random_axes";
+    int_marker.description = "6-DOF\n(Arbitrary Axes)";
+
+    makeBoxControl(int_marker);
+
+    InteractiveMarkerControl control;
+
+    for(int i=0; i<3 ;i++){
+        tf::Quaternion orien(rand(-1,1), rand(-1,1), rand(-1,1), rand(-1,1));
+        orien.normalize();
+        tf::quaternionTFToMsg(orien, control.orientation);
+        control.interactive_mode = InteractiveMarkerControl::ROTATE_AXIS;
+        int_marker.controls.push_back(control);
+        control.interaction_mode = InteractiveMarkerControl::MOVE_AXIS;
+        int_marker.controls.push_back(control);
+    }
+
+    server->insert(int_marker);
+    server->setCallback(int_marker.name, &processFeedback);
+}
