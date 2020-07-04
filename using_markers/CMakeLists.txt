@@ -213,3 +213,6 @@ target_link_libraries(points_and_lines ${catkin_LIBRARIES})
 
 add_executable(simple_marker src/simple_marker.cpp)
 target_link_libraries(simple_marker ${catkin_LIBRARIES})
+
+add_executable(basic_control src/basic_control.cpp)
+target_link_libraries(basic_control ${catkin_LIBRARIES})
