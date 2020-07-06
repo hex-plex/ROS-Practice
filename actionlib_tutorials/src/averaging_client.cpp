@@ -18,7 +18,7 @@ int main(int argc, char **argv){
 
     ROS_INFO("Action server started, sending goal");
 
-    actionlib_tutorial::AveragingGoal goal;
+    actionlib_tutorials::AveragingGoal goal;
     goal.samples = 100;
     ac.sendGoal(goal);
 
