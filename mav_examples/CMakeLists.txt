@@ -208,3 +208,6 @@ include_directories(
 
 add_executable(offb_node src/offb_node.cpp)
 target_link_libraries(offb_node ${catkin_LIBRARIES})
+
+add_executable(offb_path src/off_b_node_path.cpp)
+target_link_libraries(offb_path ${catkin_LIBRARIES})
