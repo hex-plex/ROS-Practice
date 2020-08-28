@@ -23,3 +23,17 @@ roslaunch mavros px4.launch fcu_url:="udp://:14540@127.0.0.1:14557" ## THis will
 rosrun mav_examples offb_node ## For a simple take off
 rosrun mav_examples offb_path ## For simple traversal of a circular path
 ```
+
+### Multi Vehicles
+
+Launch an empty world with the no of drones as desired
+``` bash
+roslaunch ~/PX4/Firmware/launch/multi_uav_mavros_sitl.launch world:=empty_world.launch
+```
+Running the example
+``` bash
+rosrun mav_examples offb_multi 3 ## last arguement denotes no of drones
+```
+This would make the drone rotate in a circle with constant phase difference between each drone.
+and after 1000 steps it would oscilate r between 3 and 6 infinitely long.
+
