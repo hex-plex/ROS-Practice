@@ -211,3 +211,6 @@ target_link_libraries(offb_node ${catkin_LIBRARIES})
 
 add_executable(offb_path src/off_b_node_path.cpp)
 target_link_libraries(offb_path ${catkin_LIBRARIES})
+
+add_executable(offb_multi src/off_b_multi_path.cpp)
+target_link_libraries(offb_multi ${catkin_LIBRARIES})
