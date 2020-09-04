@@ -3,12 +3,18 @@
 #include <mavros_msgs/CommandBool.h>
 #include <mavros_msgs/SetMode.h>
 #include <mavros_msgs/State.h>
-
+#include <fstream>
+#include <iostream>
+#include <sstream>
 mavros_msgs::State current_state;
 void state_cb(const mavros_msgs::State::ConstPtr& msg){
     current_state = *msg;
 }
 int main(int argc,char **argv){
+    std::fstream fin;
+    fin.open("traverse_points.csv",std::ios::in);
+    std::vector<std::string> row;
+    std::string temp,line,coor;
     ros::init(argc,argv,"offb_node");
     ros::NodeHandle nh;
     ros::Subscriber state_sub = nh.subscribe<mavros_msgs::State>("/mavros/state",10,state_cb);
@@ -32,7 +38,7 @@ int main(int argc,char **argv){
         ros::spinOnce();
         rate.sleep();
     }
-
+    ROS_INFO("HELLO WORLD");
     mavros_msgs::SetMode offb_set_mode;
     offb_set_mode.request.custom_mode ="OFFBOARD";
     mavros_msgs::CommandBool arm_cmd;
@@ -55,10 +61,20 @@ int main(int argc,char **argv){
                 last_request = ros::Time::now();
             }
         }
+        if(false){
+        if(fin>>temp){
+        row.clear();
+        std::getline(fin,line);
+        std::stringstream s(line);
+        while(std::getline(s,coor,',')){
+            row.push_back(coor);
+        }
         local_pos_pub.publish(pose);
-        pose.pose.position.x = 2*sin(0.05*i);
-        pose.pose.position.y = 2*cos(0.05*i);
-        i++;
+        pose.pose.position.x = stoi(row[1]);
+        pose.pose.position.y = stoi(row[2]);
+        pose.pose.position.z = stoi(row[3]);
+        }
+        else break;}
         ros::spinOnce();
         rate.sleep();
     }
