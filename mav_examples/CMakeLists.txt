@@ -217,3 +217,6 @@ target_link_libraries(offb_multi ${catkin_LIBRARIES})
 
 add_executable(offb_csv src/off_b_path_csv.cpp)
 target_link_libraries(offb_csv ${catkin_LIBRARIES})
+
+add_executable(offb_formation src/off_b_form.cpp)
+target_link_libraries(offb_formation ${catkin_LIBRARIES})
