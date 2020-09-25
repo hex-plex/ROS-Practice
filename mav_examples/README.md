@@ -14,7 +14,7 @@ To use it on any terminal run this first
 ``` bash
 workon-px4-default
 reg-px4
-roslaunch px4 posix_sixtl.launch ## This will launch the simulator
+roslaunch px4 posix_sitl.launch ## This will launch the simulator
 roslaunch gazebo_ros empty_world.launch world_name:=~/PX4/Firmware/Tools/sitl_gazebo/worlds/iris.world 
 ##This would initial an empty world as declared and running the command above it you will spawn the quad
 
