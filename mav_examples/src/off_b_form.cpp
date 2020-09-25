@@ -1,3 +1,4 @@
+
 #include <ros/ros.h>
 #include <geometry_msgs/PoseStamped.h>
 #include <mavros_msgs/CommandBool.h>
@@ -44,7 +45,7 @@ int main(int argc,char **argv){
     std::vector<geometry_msgs::PoseStamped> poses;
     geometry_msgs::PoseStamped dummy;
     double r=3;
-    double dr = 0.1;
+    double dr = 0.1,di=1.0;
     for(i=0;i<module;i++){
         dummy = *(new geometry_msgs::PoseStamped());
         dummy.pose.position.x = r*sin((i-1)*2*pi/module);
@@ -87,13 +88,11 @@ int main(int argc,char **argv){
         }
         poses[j].pose.position.x = r*sin(0.05*i + ((j-1)*2*pi/module));
         poses[j].pose.position.y = r*cos(0.05*i + ((j-1)*2*pi/module));
-        poses[j].pose.position.z = 2+i*0.0001;
+        poses[j].pose.position.z = 2; //+i*0.05;
         }
-         if(i<=1000)
-            {i++;
-            r+=dr;}
-        else
-            {r+=dr;}
+        i+=di;
+        //r+=5*dr;
+        if(i>200||i<0){di*=-1;}
         if(r>6||r<3){dr*=-1;}
         for(int j = 0;j<module;j++)
             local_pos_pubs[j].publish(poses[j]);
