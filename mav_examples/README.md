@@ -4,7 +4,7 @@ This contains the basic mavros package implementations.
 Installing the PX4 firmware first
 ``` bash
 cd && mkdir PX4 && cd PX4
-git clone https://github.com/PX4/Firmware
+git clone https://github.com/PX4/Firmware --recursive
 cd Firmware
 DONT_RUN=1 make px4_sitl_default gazebo 
 echo "alias workon-px4-default=\"source ~/PX4/Firmware/Tools/setup_gazebo.bash ~/PX4/Firmware ~/PX4/Firmware/build/px4_sitl_default\"" >> ~/.bashrc
